@@ -15,7 +15,7 @@ shellscripts/
 ├── rsync_backup.sh # rsync 기반 백업 자동화
 ├── sysinfo.sh # 시스템 정보 요약 출력
 
-
+```
 ---
 
 ## 🛠️ 각 스크립트 설명
