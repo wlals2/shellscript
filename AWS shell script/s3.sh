@@ -3,7 +3,7 @@
 file="$1"
 
 # S3에서 파일 가져오기
-aws s3 cp "s3://sample-s3-jimin/$file" "./$file" --region ap-northeast-2
+aws s3 cp "s3://yourbucket/$file" "./$file" --region ap-northeast-2
 
 # 다운로드 성공 시에만 추가 작업
 if [ $? -eq 0 ]; then
