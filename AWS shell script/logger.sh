@@ -37,3 +37,19 @@ while true; do
   prev_total=$total
   prev_idle=$idle_all
 done
+
+read -rp "화면 출력으로 실행하시겠습니까? (Y/N): " answer
+
+case "$answer" in
+  [Yy])
+    echo "리소스 로거를 실행합니다..."
+    nohup LOG_DIR=/var/log/resource-logger DISK_MOUNT=/ /usr/local/bin/logger.sh >/dev/null 2>&1 &
+    echo "실행 완료. 로그는 /var/log/resource-logger 에 저장됩니다."
+    ;;
+  [Nn])
+    echo "실행을 취소했습니다."
+    ;;
+  *)
+    echo "잘못된 입력입니다. Y 또는 N 을 입력해주세요."
+    ;;
+esac
