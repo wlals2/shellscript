@@ -11,7 +11,7 @@ DEST="/home/ubuntu/backup/docs"
 # DEST="user@192.168.56.200:/backup/docs"
 
 # 메일 수신자
-EMAIL="fw4568@gmail.com"
+EMAIL="yourgmail.com"
 
 # 로그 임시파일
 LOGFILE="/tmp/rsync_backup.log"

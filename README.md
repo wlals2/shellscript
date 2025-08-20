@@ -1,39 +1,66 @@
 # Linux Shell Scripts Collection
 
-리눅스/유닉스 실무 환경에서 바로 사용할 수 있는 **쉘 스크립트(sh, bash 등)모음** 서버관리, 자동화, 모니터링, 데이터 백업 등 현업에서 유용한 스크립트를 정리했습니다.
+리눅스/유닉스 운영에서 자주 쓰는 **백업, 모니터링, 점검, 자동화** 스크립트 모음입니다.  
+팀 온보딩/표준 운영절차(SOP)에 쉽게 녹여 쓸 수 있도록 **간단한 설치·사용 예시와 크론/서비스 실행 템플릿**을 제공합니다.
+
+---
+
+## 📚 목차
+- [특징](#-특징)
+- [폴더/파일 구조](#-폴더파일-구조)
+- [빠른 시작](#-빠른-시작)
+- [스크립트별 설명 & 사용법](#-스크립트별-설명--사용법)
+  - [backup_home.sh](#backup_homesh--홈-디렉토리-백업)
+  - [disk_alert.sh](#disk_alertsh--디스크-용량-경고)
+  - [hello.sh](#hellosh--샘플hello-world)
+  - [logcheck.sh](#logchecksh--시스템-로그-자동-체크)
+  - [logs_alert.sh](#logs_alertsh--로그-디렉토리용량-감시)
+  - [rsync_backup.sh](#rsync_backupsh--증분-백업-자동화)
+  - [sysinfo.sh](#sysinfosh--시스템-정보-요약)
+- [스케줄링 템플릿(cron/systemd)](#-스케줄링-템플릿cronsystemd)
+- [알림 연동(메일/Slack)](#-알림-연동메일slack)
+- [보안 & 운영 팁](#-보안--운영-팁)
+- [기여 방법](#-기여-방법)
+- [라이선스](#-라이선스)
+
+---
+
+## ✅ 특징
+- **즉시 사용 가능**: 실행 권한만 주면 바로 동작
+- **운영 친화적**: 로그·임계치·알림 연동 환경변수로 제어
+- **표준화**: 공통 디렉토리/로그 규칙과 스케줄 템플릿 제공
+- **가독성**: 각 스크립트 목적·옵션·예시를 README에 정리
 
 ---
 
 ## 📁 폴더/파일 구조
-``` bash
-shellscripts/
-├── backup_home.sh # 홈 디렉토리 백업
-├── disk_alert.sh # 디스크 용량 모니터링 및 경고
-├── hello.sh # 샘플/테스트용 Hello World
-├── logcheck.sh # 시스템 로그 자동 체크
-├── logs_alert.sh # 로그 용량 감시/경고
-├── rsync_backup.sh # rsync 기반 백업 자동화
-├── sysinfo.sh # 시스템 정보 요약 출력
+> 실제 저장 위치나 폴더명은 자유롭게 변경 가능합니다.
 
+```bash
+## 📁 폴더/파일 구조
 ```
----
-
-## 🛠️ 각 스크립트 설명
-
-| 파일명            | 설명                                
-|-------------------|--------------------------------------
-| backup_home.sh    | 홈디렉토리 전체를 백업(압축/타겟 지정 가능) 
-| disk_alert.sh     | 디스크 사용량 임계치 초과시 경고/메일 발송  
-| hello.sh          | Hello World 예제 (사용법 연습용)           
-| logcheck.sh       | 시스템 로그(예: /var/log/messages) 체크     
-| logs_alert.sh     | 로그 디렉토리/파일별 용량 자동 감시         
-| rsync_backup.sh   | rsync로 빠른 증분 백업 수행                
-| sysinfo.sh        | 시스템 핵심 정보(호스트, IP, CPU 등) 출력   
-
----
-
-## ⚡ 사용 방법
-
-1. **권한 부여**
-   ```bash
-   chmod +x shellscripts/*.sh
+```bash
+$REPO_ROOT/
+├─ backup/                     # 백업 관련
+│  ├─ backup_home.sh          # 홈 디렉토리 백업
+│  └─ rsync_backup.sh         # rsync 증분/스냅샷 백업
+│
+├─ monitor/                    # 모니터링/알림
+│  ├─ disk_alert.sh           # 디스크 임계치 경고
+│  ├─ logcheck.sh             # 시스템 로그 키워드 점검
+│  └─ logs_alert.sh           # 로그 디렉토리 용량 감시
+│
+├─ system/                     # 시스템 확인/점검
+│  └─ sysinfo.sh              # 시스템 요약 정보
+│
+├─ examples/                   # 연습/테스트
+│  ├─ hello.sh                # Hello World
+│  ├─ create_file2.sh
+│  └─ create_file3.sh
+│
+└─ aws/                        # AWS 연동 유틸(선택)
+   ├─ logger.sh               # 리소스 로거
+   ├─ s3.sh                   # S3 업/다운로드
+   ├─ s3push_slack.sh         # S3 결과 Slack 알림
+   └─ uploader.sh             # 업로더
+```

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 THRESHOLD=80
-EMAIL="fw4568@gmail.com"
+EMAIL="yourgmail.com"
 DATE=$(date '+%F %T')
 HOST=$(hostname)
 LOGFILE="/var/log/disk_usage_alert.log"
